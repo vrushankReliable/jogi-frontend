@@ -7,9 +7,9 @@ const Footer = () => {
   return (
     <footer className="w-full bg-[#3A6F78] pt-12 lg:pt-16 pb-8 text-white">
       <div className="w-full max-w-[1325px] mx-auto px-6 lg:px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 text-center lg:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 text-left">
           {/* Column 1: Logo, Social, Newsletter */}
-          <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start">
+          <div className="flex flex-col gap-6 lg:gap-8 items-start">
             {/* Logo */}
             <div className="relative w-[180px] h-[60px]">
               <Image
@@ -56,9 +56,9 @@ const Footer = () => {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="flex flex-col items-center lg:items-start">
+          <div className="flex flex-col items-start">
             <h3 className="text-[20px] font-bold mb-6">Quick Links</h3>
-            <ul className="flex flex-col w-full max-w-[200px] lg:max-w-none">
+            <ul className="flex flex-col w-full lg:max-w-none">
               {[
                 { label: "Home", href: "/" },
                 { label: "Our Doctors", href: "/doctors" },
@@ -83,9 +83,9 @@ const Footer = () => {
           </div>
 
           {/* Column 3: Services */}
-          <div className="flex flex-col items-center lg:items-start">
+          <div className="flex flex-col items-start">
             <h3 className="text-[20px] font-bold mb-6">Services</h3>
-            <ul className="flex flex-col w-full max-w-[200px] lg:max-w-none">
+            <ul className="flex flex-col w-full lg:max-w-none">
               {[
                 { label: "Online Consultation", href: "/online-consultation" },
                 { label: "Panchkarma Treatment", href: "/panchakarma" },
@@ -107,9 +107,9 @@ const Footer = () => {
           </div>
 
           {/* Column 4: Contact */}
-          <div className="flex flex-col items-center lg:items-start">
+          <div className="flex flex-col items-start">
             <h3 className="text-[20px] font-bold mb-6">Contact</h3>
-            <div className="flex flex-col gap-4 w-full max-w-[300px] lg:max-w-none">
+            <div className="flex flex-col gap-4 w-full lg:max-w-none">
               {/* Email */}
               <div className="flex items-center gap-2 py-2 border-b border-[#ffffff33] pt-0">
                 <Image

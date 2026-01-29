@@ -59,6 +59,14 @@ const books = [
 
 const SpreadingAyurveda = () => {
   const [activeIndex, setActiveIndex] = React.useState(2);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -100,8 +108,8 @@ const SpreadingAyurveda = () => {
           greater life balance.
         </p>
 
-        {/* Books Container */}
-        <div className="flex justify-center items-center gap-4 mb-10 h-[470px] relative w-full overflow-hidden">
+        {/* Books Container - Unified Responsive Animation */}
+        <div className="flex justify-center items-center gap-4 mb-10 h-[350px] lg:h-[470px] relative w-full overflow-hidden">
           {books.map((book, index) => {
             // Calculate circular distance
             const total = books.length;
@@ -113,22 +121,25 @@ const SpreadingAyurveda = () => {
             };
 
             const d = getDist(index, activeIndex, total);
-
             // Visual styles with fixed pixel spacing
             const dist = Math.abs(d);
-
             // Scales
             const scale = dist === 0 ? 1 : dist === 1 ? 0.85 : 0.7;
 
-            // Horizontal Positions (calculated for strict gap)
+            // Horizontal Positions
             const xBase = d > 0 ? 1 : -1;
+
+            // Responsive spacing steps
+            const step1 = isMobile ? 80 : 275;
+            const step2 = isMobile ? 150 : 510;
+            const step3 = isMobile ? 200 : 750; // Push far items away
+
             let xVal = 0;
-            if (dist === 1) xVal = 275;
-            else if (dist === 2) xVal = 510;
-            else if (dist >= 3) xVal = 750 + (dist - 3) * 200;
+            if (dist === 1) xVal = step1;
+            else if (dist === 2) xVal = step2;
+            else if (dist >= 3) xVal = step3 + (dist - 3) * 100;
 
             const x = xBase * xVal;
-
             // Opacity & Z-Index
             const opacity = dist > 2 ? 0 : 1;
             const zIndex = 30 - dist * 5;
@@ -144,11 +155,9 @@ const SpreadingAyurveda = () => {
                   transform: `translate(-50%, -50%) translateX(${x}px) scale(${scale})`, // Using px
                   zIndex: zIndex,
                   opacity: opacity,
-                  width: "265px",
-                  height: "470px",
+                  width: isMobile ? "180px" : "265px",
+                  height: isMobile ? "320px" : "470px",
                   // Critical Flyover Fix:
-                  // Disable transition if we are moving to a position > 3 (or < -3).
-                  // This captures the wrap-around moment where the item is off-screen.
                   transition: dist > 3 ? "none" : "all 0.5s ease-in-out",
                 }}
               >

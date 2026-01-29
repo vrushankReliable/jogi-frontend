@@ -91,19 +91,11 @@ const Navbar = () => {
     <div className="flex flex-col w-full font-sans fixed top-0 left-0 right-0 z-50">
       <TopBar />
 
-      <div className="h-[80px] lg:h-[100px] bg-neutral-bg flex items-center justify-between px-4 lg:px-12 relative z-50 shadow-sm lg:shadow-none">
-        {/* Mobile Menu Button - Visible on Mobile Only */}
-        <button
-          className="lg:hidden p-2 -ml-2"
-          onClick={() => setIsMobileMenuOpen(true)}
-        >
-          <Image src="/icons/menu.svg" alt="Menu" width={24} height={24} />
-        </button>
-
-        {/* Logo */}
+      <div className="h-[80px] min-[769px]:h-[100px] bg-neutral-bg flex items-center justify-between px-4 min-[769px]:px-12 relative z-50 shadow-sm min-[769px]:shadow-none">
+        {/* Logo - First Item (Left Aligned) */}
         <Link
           href="/"
-          className="flex-shrink-0 relative w-[100px] lg:w-[150px] h-[40px] lg:h-[50px]"
+          className="flex-shrink-0 relative w-[100px] min-[769px]:w-[150px] h-[40px] min-[769px]:h-[50px] mr-auto"
         >
           <Image
             src="/logo.png"
@@ -113,8 +105,7 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* Mobile Search/Phone Icons - Visible on Mobile Only */}
-        <div className="flex items-center gap-3 lg:hidden">
+        <div className="flex items-center gap-3 min-[769px]:hidden">
           <button className="w-[36px] h-[36px] bg-primary rounded-full flex items-center justify-center">
             <Image
               src="/icons/search.svg"
@@ -123,16 +114,18 @@ const Navbar = () => {
               height={16}
             />
           </button>
-          <a
-            href="tel:+918800118053"
-            className="w-[36px] h-[36px] bg-primary rounded-full flex items-center justify-center"
+
+          {/* Mobile Menu Button inside the group */}
+          <button
+            className="p-1 pl-2"
+            onClick={() => setIsMobileMenuOpen(true)}
           >
-            <Image src="/icons/phone.svg" alt="Phone" width={16} height={16} />
-          </a>
+            <Image src="/icons/menu.svg" alt="Menu" width={24} height={24} />
+          </button>
         </div>
 
         {/* Desktop Navigation - Hidden on Mobile */}
-        <div className="hidden lg:flex items-center h-full gap-8">
+        <div className="hidden min-[769px]:flex items-center h-full gap-8">
           {/* Navigation Links */}
           <div className="flex items-center h-full gap-0">
             <Link href="/doctors">
@@ -216,14 +209,14 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 bg-black/50 z-[60] invisible opacity-0 lg:hidden"
+        className="fixed inset-0 bg-black/60 z-[60] invisible opacity-0 min-[769px]:hidden"
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Mobile Menu Drawer */}
       <div
         ref={menuRef}
-        className="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white z-[70] transform -translate-x-full lg:hidden flex flex-col shadow-2xl h-full"
+        className="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white z-[70] transform -translate-x-full min-[769px]:hidden flex flex-col shadow-2xl h-full"
       >
         {/* Drawer Header */}
         <div className="h-[60px] flex items-center justify-between px-6 border-b border-gray-100">
@@ -315,6 +308,13 @@ const Navbar = () => {
           >
             SHOP
           </Link>
+          <a
+            href="tel:+918800118053"
+            className="px-4 py-3 text-sm font-bold text-neutral-text hover:bg-gray-50 rounded-lg flex items-center gap-2"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            CALL US
+          </a>
         </div>
 
         {/* Drawer Footer */}

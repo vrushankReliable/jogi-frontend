@@ -35,22 +35,22 @@ const slides = [
     description:
       "JOGI Ayurved focuses on treating the root cause of illness through authentic Ayurvedic principles and personalized care. With a holistic approach, natural medicines, and guided lifestyle recommendations, the hospital aims to restore balance, improve overall health, and support long-term wellness in a safe and natural way.",
   },
-  {
-    id: 5,
-    image: "/why-jogi/slide5.png",
-    label: "Expert Care",
-    title: "Why JOGI Ayurved?",
-    description:
-      "JOGI Ayurved focuses on treating the root cause of illness through authentic Ayurvedic principles and personalized care. With a holistic approach, natural medicines, and guided lifestyle recommendations, the hospital aims to restore balance, improve overall health, and support long-term wellness in a safe and natural way.",
-  },
-  {
-    id: 6,
-    image: "/why-jogi/slide6.png",
-    label: "Lasting Results",
-    title: "Why JOGI Ayurved?",
-    description:
-      "JOGI Ayurved focuses on treating the root cause of illness through authentic Ayurvedic principles and personalized care. With a holistic approach, natural medicines, and guided lifestyle recommendations, the hospital aims to restore balance, improve overall health, and support long-term wellness in a safe and natural way.",
-  },
+  // {
+  //   id: 5,
+  //   image: "/why-jogi/slide5.png",
+  //   label: "Expert Care",
+  //   title: "Why JOGI Ayurved?",
+  //   description:
+  //     "JOGI Ayurved focuses on treating the root cause of illness through authentic Ayurvedic principles and personalized care. With a holistic approach, natural medicines, and guided lifestyle recommendations, the hospital aims to restore balance, improve overall health, and support long-term wellness in a safe and natural way.",
+  // },
+  // {
+  //   id: 6,
+  //   image: "/why-jogi/slide6.png",
+  //   label: "Lasting Results",
+  //   title: "Why JOGI Ayurved?",
+  //   description:
+  //     "JOGI Ayurved focuses on treating the root cause of illness through authentic Ayurvedic principles and personalized care. With a holistic approach, natural medicines, and guided lifestyle recommendations, the hospital aims to restore balance, improve overall health, and support long-term wellness in a safe and natural way.",
+  // },
 ];
 
 const WhyJogi = () => {
@@ -72,7 +72,7 @@ const WhyJogi = () => {
 
       <div className="w-full max-w-[1320px] mx-auto px-4 relative z-10">
         {/* Banner Container */}
-        <div className="relative w-full h-[440px] rounded-[30px] overflow-hidden">
+        <div className="relative w-full h-[500px] min-[1025px]:h-[440px] rounded-[30px] overflow-hidden">
           {/* Background Image */}
           <Image
             src="/why-jogi-banner.png"
@@ -85,11 +85,11 @@ const WhyJogi = () => {
           <div className="absolute inset-0 bg-[#D9D9D9]/15 z-[1]" />
 
           {/* Content Overlay */}
-          <div className="absolute inset-0 z-10 flex h-full">
+          <div className="absolute inset-0 z-10 flex flex-col min-[1025px]:flex-row h-full">
             {/* Left Side - Image and Navigation */}
-            <div className="flex flex-col justify-center items-center pl-16 pt-12 pb-8">
+            <div className="flex flex-col justify-center items-center min-[1025px]:pl-16 pt-8 min-[1025px]:pt-12 pb-4 min-[1025px]:pb-8 h-1/2 min-[1025px]:h-full">
               {/* Image Container with White Border and Semi-transparent BG */}
-              <div className="relative w-[420px] h-[260px] border-2 border-white rounded-lg overflow-hidden">
+              <div className="relative w-[280px] h-[180px] min-[1025px]:w-[420px] min-[1025px]:h-[260px] border-2 border-white rounded-lg overflow-hidden">
                 {slides.map((slide, index) => (
                   <div
                     key={slide.id}
@@ -108,7 +108,7 @@ const WhyJogi = () => {
               </div>
 
               {/* Slide Label - Centered */}
-              <p className="text-white text-[24px] font-bold font-sans leading-[40px] mt-5 text-center">
+              <p className="text-white text-[18px] min-[1025px]:text-[24px] font-bold font-sans leading-[30px] min-[1025px]:leading-[40px] mt-3 min-[1025px]:mt-5 text-center">
                 {slides[currentSlide].label}
               </p>
 
@@ -130,15 +130,15 @@ const WhyJogi = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="flex-1 flex flex-col justify-center items-end pr-12 py-8">
-              <div className="max-w-[520px] text-right">
-                <h2 className="text-[32px] font-bold text-white font-sans mb-4">
+            <div className="flex-1 flex flex-col justify-start min-[1025px]:justify-center items-center min-[1025px]:items-end px-4 min-[1025px]:pr-12 min-[1025px]:pl-0 pb-8 min-[1025px]:py-8 text-center min-[1025px]:text-right">
+              <div className="max-w-full min-[1025px]:max-w-[520px]">
+                <h2 className="text-[24px] min-[1025px]:text-[32px] font-bold text-white font-sans mb-2 min-[1025px]:mb-4">
                   {slides[currentSlide].title}
                 </h2>
-                <p className="text-white/90 text-[22px] font-normal leading-[24px] font-sans mb-8">
+                <p className="text-white/90 text-[14px] min-[1025px]:text-[22px] font-normal leading-[20px] min-[1025px]:leading-[24px] font-sans mb-4 min-[1025px]:mb-8 line-clamp-4 min-[1025px]:line-clamp-none">
                   {slides[currentSlide].description}
                 </p>
-                <button className="w-[208px] h-[45px] bg-neutral-bg text-primary rounded-[50px] font-semibold text-[14px] hover:bg-white transition-colors duration-300">
+                <button className="w-[160px] min-[1025px]:w-[208px] h-[40px] min-[1025px]:h-[45px] bg-neutral-bg text-primary rounded-[50px] font-semibold text-[12px] min-[1025px]:text-[14px] hover:bg-white transition-colors duration-300">
                   VISIT US
                 </button>
               </div>

@@ -59,6 +59,14 @@ const patients = [
 
 const WhatHappyPatientsSays = () => {
   const [activeIndex, setActiveIndex] = useState(2); // Start with center item
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,7 +92,7 @@ const WhatHappyPatientsSays = () => {
         </p>
 
         {/* Patient Gallery - 5 items with varying heights */}
-        <div className="flex justify-center items-center gap-4 mb-10 h-[470px] relative w-full overflow-hidden">
+        <div className="flex justify-center items-center gap-4 mb-10 h-[300px] lg:h-[470px] relative w-full overflow-hidden">
           {patients.map((patient, index) => {
             // Calculate circular distance
             const total = patients.length;
@@ -108,10 +116,15 @@ const WhatHappyPatientsSays = () => {
             // Gap ~30px -> 550px
 
             const xBase = d > 0 ? 1 : -1;
+            const step1 = isMobile ? 80 : 275;
+            const step2 = isMobile ? 150 : 510;
+            const step3 = isMobile ? 200 : 750;
+            const extraStep = isMobile ? 50 : 200;
+
             let xVal = 0;
-            if (dist === 1) xVal = 275;
-            else if (dist === 2) xVal = 510;
-            else if (dist >= 3) xVal = 750 + (dist - 3) * 200; // Push far items away
+            if (dist === 1) xVal = step1;
+            else if (dist === 2) xVal = step2;
+            else if (dist >= 3) xVal = step3 + (dist - 3) * extraStep; // Push far items away
 
             const x = xBase * xVal;
 
@@ -130,8 +143,8 @@ const WhatHappyPatientsSays = () => {
                   transform: `translate(-50%, -50%) translateX(${x}px) scale(${scale})`,
                   zIndex: zIndex,
                   opacity: opacity,
-                  width: "265px",
-                  height: "470px",
+                  width: isMobile ? "180px" : "265px",
+                  height: isMobile ? "320px" : "470px",
                   // Critical Flyover Fix:
                   // Disable transition if we are moving to a position > 3 (or < -3).
                   // This captures the wrap-around moment where the item is off-screen.

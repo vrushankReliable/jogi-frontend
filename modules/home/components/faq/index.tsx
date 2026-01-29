@@ -209,7 +209,20 @@ const FAQ = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [openFAQId, setOpenFAQId] = useState<number | null>(null);
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const categoryRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({}); // New ref for tabs
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 }); // New state for mobile bar
+
+  // Update mobile indicator position
+  useEffect(() => {
+    const activeTab = categoryRefs.current[activeCategory];
+    if (activeTab) {
+      setIndicatorStyle({
+        left: activeTab.offsetLeft,
+        width: activeTab.offsetWidth,
+      });
+    }
+  }, [activeCategory]);
 
   // Setup scroll-based category detection
   useLayoutEffect(() => {
@@ -217,40 +230,73 @@ const FAQ = () => {
     if (!container) return;
 
     const handleScroll = () => {
-      const containerRect = container.getBoundingClientRect();
+      const isMobile = window.innerWidth < 1024;
 
-      // Find which section is most visible
       let mostVisibleSection = faqSections[0].id;
-      let maxVisibility = 0;
 
-      faqSections.forEach((section) => {
-        const sectionEl = sectionRefs.current[section.id];
-        if (sectionEl) {
-          const sectionRect = sectionEl.getBoundingClientRect();
+      if (isMobile) {
+        // Mobile: Window scroll logic
+        const headerOffset = 140; // Approx sticky header height + buffer
+        let minDistance = Infinity;
 
-          // Calculate intersection height
-          const intersectionTop = Math.max(containerRect.top, sectionRect.top);
-          const intersectionBottom = Math.min(
-            containerRect.bottom,
-            sectionRect.bottom,
-          );
-          const visibleHeight = Math.max(
-            0,
-            intersectionBottom - intersectionTop,
-          );
+        faqSections.forEach((section) => {
+          const sectionEl = sectionRefs.current[section.id];
+          if (sectionEl) {
+            const rect = sectionEl.getBoundingClientRect();
+            // Distance from top of sticky header area
+            const distance = Math.abs(rect.top - headerOffset);
 
-          if (visibleHeight > maxVisibility) {
-            maxVisibility = visibleHeight;
-            mostVisibleSection = section.id;
+            // Check if section is somewhat visible (top is above fold or just below)
+            // and bottom is below the header
+            if (rect.bottom > headerOffset && distance < minDistance) {
+              minDistance = distance;
+              mostVisibleSection = section.id;
+            }
           }
-        }
-      });
+        });
+      } else {
+        // Desktop: Container scroll logic
+        const containerRect = container.getBoundingClientRect();
+        let maxVisibility = 0;
+
+        faqSections.forEach((section) => {
+          const sectionEl = sectionRefs.current[section.id];
+          if (sectionEl) {
+            const sectionRect = sectionEl.getBoundingClientRect();
+
+            // Calculate intersection height
+            const intersectionTop = Math.max(
+              containerRect.top,
+              sectionRect.top,
+            );
+            const intersectionBottom = Math.min(
+              containerRect.bottom,
+              sectionRect.bottom,
+            );
+            const visibleHeight = Math.max(
+              0,
+              intersectionBottom - intersectionTop,
+            );
+
+            if (visibleHeight > maxVisibility) {
+              maxVisibility = visibleHeight;
+              mostVisibleSection = section.id;
+            }
+          }
+        });
+      }
 
       setActiveCategory(mostVisibleSection);
     };
 
+    window.addEventListener("scroll", handleScroll);
     container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      container.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleToggle = (id: number) => {
@@ -260,13 +306,24 @@ const FAQ = () => {
   const scrollToSection = (sectionId: string) => {
     const container = scrollContainerRef.current;
     const sectionEl = sectionRefs.current[sectionId];
-    if (container && sectionEl) {
-      const targetScroll = sectionEl.offsetTop - container.offsetTop;
-      gsap.to(container, {
-        scrollTop: targetScroll,
-        duration: 1,
-        ease: "power3.inOut",
-      });
+
+    if (sectionEl) {
+      if (window.innerWidth < 1024) {
+        // Mobile: Scroll window
+        const y = sectionEl.getBoundingClientRect().top + window.scrollY - 130; // Offset for sticky headers
+        window.scrollTo({
+          top: y,
+          behavior: "smooth",
+        });
+      } else if (container) {
+        // Desktop: Scroll container
+        const targetScroll = sectionEl.offsetTop;
+        gsap.to(container, {
+          scrollTop: targetScroll,
+          duration: 1,
+          ease: "power3.inOut",
+        });
+      }
     }
   };
 
@@ -297,18 +354,20 @@ const FAQ = () => {
           Frequently Asked Questions
         </h2>
 
-        {/* Content Container - Fixed Height */}
+        {/* Content Container */}
         <div
-          className="flex gap-8"
-          style={{ height: "calc(100vh - 250px)", maxHeight: "600px" }}
+          className="flex flex-col lg:flex-row gap-8"
+          style={{ height: "auto", minHeight: "500px" }}
         >
-          {/* Left Sidebar - Categories with Progress Bar */}
-          <div className="w-[319px] flex-shrink-0">
-            <div className="flex h-full">
-              {/* Progress Bar */}
+          {/* Left Sidebar - Categories */}
+          <div className="w-full lg:w-[319px] flex-shrink-0 sticky top-[80px] z-30 bg-white pt-2 lg:pt-0">
+            <div className="flex flex-row h-full pb-4 lg:pb-0 gap-4 border-b lg:border-b-0 border-[#E5E5E5] lg:border-none relative">
+              {/* Vertical Progress Bar */}
               <div
-                className="w-[3px] bg-[#E5E5E5] relative mr-4"
-                style={{ height: `${faqSections.length * 44}px` }}
+                className="w-[3px] bg-[#E5E5E5] relative mr-0 lg:mr-4 flex-shrink-0"
+                style={{
+                  height: `${faqSections.length * 44}px`,
+                }}
               >
                 <div
                   className="absolute left-0 w-full h-[44px] bg-[#3A6F78] transition-all duration-300"
@@ -317,12 +376,12 @@ const FAQ = () => {
               </div>
 
               {/* Categories */}
-              <div className="flex flex-col">
+              <div className="flex flex-col w-full">
                 {faqSections.map((section) => (
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
-                    className={`text-left py-3 px-2 text-[14px] font-medium uppercase tracking-wide transition-colors ${
+                    className={`w-full whitespace-nowrap text-left px-4 lg:px-2 text-[12px] lg:text-[14px] font-bold uppercase tracking-wide transition-colors h-[44px] flex items-center ${
                       activeCategory === section.id
                         ? "text-[#3A6F78]"
                         : "text-[#999] hover:text-[#666]"
@@ -338,7 +397,7 @@ const FAQ = () => {
           {/* Right Side - Scrollable FAQ Container */}
           <div
             ref={scrollContainerRef}
-            className="flex-1 overflow-y-auto pr-4 custom-scrollbar"
+            className="relative flex-1 overflow-visible lg:overflow-y-auto pr-0 lg:pr-4 custom-scrollbar h-auto lg:h-[600px]"
           >
             <div className="flex flex-col gap-8">
               {faqSections.map((section) => (
@@ -350,7 +409,7 @@ const FAQ = () => {
                   className="flex flex-col gap-3"
                 >
                   {/* Section Title */}
-                  <h3 className="text-[24px] font-semibold text-[#3A6F78] mb-2">
+                  <h3 className="text-[20px] lg:text-[24px] font-semibold text-[#3A6F78] mb-2">
                     {section.label}
                   </h3>
 

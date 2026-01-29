@@ -39,6 +39,7 @@
 
   --animate-scroll: scroll 40s linear infinite;
   --animate-marquee: scroll 30s linear infinite;
+  --animate-marquee-mobile: scroll 5s linear infinite;
 }
 
 @media (prefers-color-scheme: dark) {

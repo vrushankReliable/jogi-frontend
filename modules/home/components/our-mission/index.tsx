@@ -41,11 +41,11 @@ const OurMission = () => {
         </p>
 
         {/* Stats Container */}
-        <div className="flex justify-center items-center gap-12">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-12">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="relative w-[249px] h-[270px] flex items-center justify-center"
+              className="relative w-[249px] h-[270px] flex items-center justify-center transform hover:scale-105 transition-transform duration-300"
             >
               {/* Background Mandala SVG */}
               <Image

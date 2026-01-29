@@ -83,8 +83,8 @@ const HealingJourneys = () => {
     () => {
       const mm = gsap.matchMedia();
 
-      // Desktop Animation Only
-      mm.add("(min-width: 1024px)", () => {
+      // Animation for ALL screens
+      mm.add("(min-width: 0px)", () => {
         // Shorter scroll distance so text unpins sooner ("start going up by now")
         const scrollDist = "200%";
 
@@ -153,7 +153,7 @@ const HealingJourneys = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full h-auto lg:h-screen overflow-hidden relative bg-neutral-bg z-10 py-16 lg:py-0"
+      className="w-full h-auto min-[1025px]:h-screen overflow-hidden relative bg-neutral-bg z-10 py-16 min-[1025px]:py-0"
     >
       {/* Waves Design Pattern - Right Side (half off-screen) */}
       <div className="absolute top-[20%] right-[-250px] w-[500px] h-[500px] opacity-10 pointer-events-none z-[5]">
@@ -161,18 +161,18 @@ const HealingJourneys = () => {
       </div>
 
       {/* Sticky Text Container */}
-      <div className="w-full lg:h-full flex flex-col justify-center items-center relative z-20 pointer-events-none px-4 pt-10 lg:pt-[130px]">
-        <div className="max-w-[543px] flex flex-col items-center text-center pointer-events-auto">
+      <div className="w-full min-[1025px]:h-full flex flex-col justify-center items-center relative z-20 pointer-events-none px-4 pt-10 min-[1025px]:pt-[130px]">
+        <div className="max-w-[543px] flex flex-col items-center text-center pointer-events-auto bg-neutral-bg min-[1025px]:bg-transparent px-6 py-8 rounded-[20px] min-[1025px]:p-0 min-[1025px]:rounded-none">
           {/* Headline - Montserrat Bold 38px */}
-          <h2 className="text-[28px] lg:text-[38px] font-bold text-black font-sans leading-[36px] lg:leading-[40px] mb-6 lg:mb-8">
+          <h2 className="text-[clamp(28px,4vw,38px)] font-bold text-black font-sans leading-[36px] min-[1025px]:leading-[40px] mb-6 min-[1025px]:mb-8">
             Healing journeys
             <br />
             through Ayurveda
           </h2>
 
           {/* Content - Montserrat Medium 22px */}
-          <div className="space-y-6 lg:space-y-8">
-            <p className="text-[#7C7C7C] text-[16px] lg:text-[22px] font-medium leading-[26px] font-sans">
+          <div className="space-y-6 min-[1025px]:space-y-8">
+            <p className="text-[#7C7C7C] text-[clamp(16px,2vw,22px)] font-medium leading-[26px] font-sans">
               At JOGI Ayurved, we draw wisdom from the timeless science of
               Ayurveda to nurture both body and mind. Our treatments are
               thoughtfully designed to restore balance, strengthen immunity, and
@@ -181,7 +181,7 @@ const HealingJourneys = () => {
               not just on relieving symptoms but on improving overall
               well-being.
             </p>
-            <p className="text-[#7C7C7C] text-[16px] lg:text-[22px] font-medium leading-[26px] font-sans">
+            <p className="text-[#7C7C7C] text-[clamp(16px,2vw,22px)] font-medium leading-[26px] font-sans">
               At JOGI Ayurved, health is a journey—where balance is restored,
               wellness is celebrated, and true healing begins from within.
             </p>
@@ -195,16 +195,16 @@ const HealingJourneys = () => {
         </div>
       </div>
 
-      {/* Scattered Images Layer - Hidden on Mobile */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-300 hidden lg:block">
+      {/* Scattered Images Layer - Visible on all screens */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-300 block">
         {scatteredImages.map((img, index) => (
           <div
             key={index}
-            className={`scattered-image absolute ${img.size} rounded-[20px] overflow-hidden will-change-transform`}
+            className={`scattered-image absolute ${img.size} rounded-[20px] overflow-hidden will-change-transform scale-75 min-[1025px]:scale-100 origin-center opacity-40 min-[1025px]:opacity-100`}
             style={{
               top: img.top,
               left: img.left,
-              // @ts-ignore - straightforward handling if 'right' exists
+              // @ts-ignore
               right: img.right,
               zIndex: 1, // Keep them behind or around text
             }}

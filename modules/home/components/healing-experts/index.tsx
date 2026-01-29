@@ -43,7 +43,7 @@ const HealingExperts = () => {
 
       <div className="max-w-[1320px] w-full px-4 flex flex-col items-center relative z-10">
         {/* Title */}
-        <h2 className="text-[38px] font-bold text-black font-sans leading-[46px] mb-12 text-center">
+        <h2 className="text-[clamp(28px,4vw,38px)] font-bold text-black font-sans leading-[1.2] mb-12 text-center">
           Meet Our Healing Experts
         </h2>
 

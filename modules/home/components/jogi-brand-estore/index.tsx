@@ -26,12 +26,12 @@ const JogiBrandEstore = () => {
           JOGI Brand E-store
         </h2>
 
-        {/* Products Grid - 4x2 */}
-        <div className="grid grid-cols-4 gap-5 mb-10">
+        {/* Products Grid/Scroll - Horizontal Scroll on Mobile, Grid on Desktop */}
+        <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory pb-4 lg:pb-0 lg:grid lg:grid-cols-4 lg:gap-5 mb-10 no-scrollbar">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-[20px] border-2 border-[#3A6F78] p-6 flex flex-col items-center justify-center cursor-pointer hover:shadow-lg transition-shadow aspect-[311/377]"
+              className="flex-shrink-0 w-[240px] lg:w-auto snap-center bg-white rounded-[20px] border-2 border-[#3A6F78] p-6 flex flex-col items-center justify-center cursor-pointer hover:shadow-lg transition-shadow aspect-[311/377]"
             >
               {/* Product Image */}
               <div className="relative w-[180px] h-[280px] flex-shrink-0 mb-4">
@@ -41,7 +41,7 @@ const JogiBrandEstore = () => {
                   fill
                   className="object-contain"
                 />
-              </div>  
+              </div>
 
               {/* Product Name */}
               <h3 className="text-[20px] font-semibold text-black text-center">

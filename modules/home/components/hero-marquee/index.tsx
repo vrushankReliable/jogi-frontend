@@ -15,7 +15,7 @@ const marqueeItems = [
 const HeroMarquee = () => {
   return (
     <div className="w-full bg-white border-b border-gray-100">
-      <div className="max-w-[1320px] mx-auto h-[140px] flex items-center overflow-hidden relative">
+      <div className="max-w-[1320px] mx-auto h-[100px] min-[769px]:h-[140px] flex items-center overflow-hidden relative">
         {/* Left Fade Overlay */}
         <div className="absolute left-0 top-0 bottom-0 w-[140px] z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
 
@@ -27,10 +27,10 @@ const HeroMarquee = () => {
             <div key={i} className="flex items-center shrink-0">
               {marqueeItems.map((item, index) => (
                 <React.Fragment key={index}>
-                  <span className="text-[34px] font-semibold text-primary leading-[40px] tracking-normal font-sans mx-8">
+                  <span className="text-[24px] min-[769px]:text-[34px] font-semibold text-primary leading-[40px] tracking-normal font-sans mx-4 min-[769px]:mx-8">
                     {item}
                   </span>
-                  <span className="text-[68px] text-primary mx-4 leading-none relative top-[14px]">
+                  <span className="text-[40px] min-[769px]:text-[68px] text-primary mx-2 min-[769px]:mx-4 leading-none relative top-[8px] min-[769px]:top-[14px]">
                     *
                   </span>
                 </React.Fragment>
