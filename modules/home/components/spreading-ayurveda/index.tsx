@@ -2,64 +2,32 @@
 import React from "react";
 import Image from "next/image";
 
-// Book data with dimensions
-const books = [
-  {
-    id: 1,
-    image: "/spreading-ayurveda/spreading-ayurveda1.png",
-    alt: "Healthy Dincharya",
-  },
-  {
-    id: 2,
-    image: "/spreading-ayurveda/spreading-ayurveda2.png",
-    alt: "Gharno Ved",
-  },
-  {
-    id: 3,
-    image: "/spreading-ayurveda/spreading-ayurveda3.png",
-    alt: "Bhojanpratha",
-  },
-  {
-    id: 4,
-    image: "/spreading-ayurveda/spreading-ayurveda4.png",
-    alt: "Prakruti Olakho",
-  },
-  {
-    id: 5,
-    image: "/spreading-ayurveda/spreading-ayurveda5.png",
-    alt: "Garbhsanskar",
-  },
-  // Duplicating for infinite loop
-  {
-    id: 1, // Duplicate ID, will use index for key
-    image: "/spreading-ayurveda/spreading-ayurveda1.png",
-    alt: "Healthy Dincharya",
-  },
-  {
-    id: 2,
-    image: "/spreading-ayurveda/spreading-ayurveda2.png",
-    alt: "Gharno Ved",
-  },
-  {
-    id: 3,
-    image: "/spreading-ayurveda/spreading-ayurveda3.png",
-    alt: "Bhojanpratha",
-  },
-  {
-    id: 4,
-    image: "/spreading-ayurveda/spreading-ayurveda4.png",
-    alt: "Prakruti Olakho",
-  },
-  {
-    id: 5,
-    image: "/spreading-ayurveda/spreading-ayurveda5.png",
-    alt: "Garbhsanskar",
-  },
-];
+import api from "@/services/api";
 
 const SpreadingAyurveda = () => {
-  const [activeIndex, setActiveIndex] = React.useState(2);
+  const [books, setBooks] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [activeIndex, setActiveIndex] = React.useState(0);
   const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const { data } = await api.get("/books");
+        // Duplicate for infinite loop if needed, but the current logic handles circularity
+        // Let's duplicate it once to ensure we have enough items for the slider
+        if (data.data && data.data.length > 0) {
+          setBooks([...data.data, ...data.data]);
+          setActiveIndex(Math.floor(data.data.length / 2));
+        }
+      } catch (error) {
+        console.error("Failed to fetch books", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBooks();
+  }, []);
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -69,11 +37,14 @@ const SpreadingAyurveda = () => {
   }, []);
 
   React.useEffect(() => {
+    if (books.length === 0) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % books.length);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [books.length]);
+
+  if (loading || books.length === 0) return null;
 
   return (
     <section id="spreading-ayurveda" className="w-full bg-white py-16 relative">
@@ -168,10 +139,11 @@ const SpreadingAyurveda = () => {
                   <div className="absolute inset-0 rounded-[24px] overflow-hidden">
                     <div className="relative w-full h-full bg-white">
                       <Image
-                        src={book.image}
-                        alt={book.alt}
+                        src={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1/public", "")}/${book.image}`}
+                        alt={book.title}
                         fill
                         className="object-cover"
+                        unoptimized
                       />
                     </div>
                   </div>

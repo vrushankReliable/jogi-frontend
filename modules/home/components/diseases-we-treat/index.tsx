@@ -6,83 +6,27 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-// Disease data
-const diseases = [
-  {
-    title: "Hair Problems",
-    image: "/diseases/hair-problems.png",
-    conditions: ["Hair Loss", "Dandruff", "Scalp Psoriasis", "Alopecia"],
-  },
-  {
-    title: "Digestive Disorders",
-    image: "/diseases/digestive-disorders.png",
-    conditions: ["Constipation", "GERD", "IBS", "Acidity"],
-  },
-  {
-    title: "Joints & Muscle Pain",
-    image: "/diseases/joint-and-muscle-pain.jpg",
-    conditions: ["Spondylitis", "Arthritis", "Sciatica", "AVN"],
-  },
-  {
-    title: "Neurological Disorders",
-    image: "/diseases/neurological-disorder.png",
-    conditions: ["Migraine", "Epilepsy", "Parkinson’s", "Sciatica"],
-  },
-  {
-    title: "Skin Disease",
-    image: "/diseases/skin-diseases.png",
-    conditions: ["Psoriasis", "Urticaria", "Vitiligo", "Eczema"],
-  },
-  {
-    title: "Gynecological Disease",
-    image: "/diseases/gynecological-diseases.jpg",
-    conditions: [
-      "PCOD/PCOS",
-      "Infertility",
-      "Leucorrhoea",
-      "Menopause Problems",
-    ],
-  },
-  {
-    title: "Endocrine Diseases",
-    image: "/diseases/endocrine-diseases.png",
-    conditions: ["Diabetes", "Obesity", "Thyroid", "PCOS"],
-  },
-  {
-    title: "Sexual Problems",
-    image: "/diseases/sexual-problems.png",
-    conditions: [
-      "Erectile Dysfunction",
-      "Oligospermia",
-      "Varicocele",
-      "Premature Ejaculation",
-    ],
-  },
-  {
-    title: "Respiratory Disorders",
-    image: "/diseases/respiratory-diseases.png",
-    conditions: ["Asthma", "Bronchitis", "Allergic Rhinitis", "Sinusitis"],
-  },
-  {
-    title: "Life Style Disease",
-    image: "/diseases/life-style-diseases.png",
-    conditions: ["Obesity", "Diabetes", "Hypertension", "PCOD"],
-  },
-  {
-    title: "Anorectal Disease",
-    image: "/diseases/anorectal-diseases.jpg",
-    conditions: ["Piles", "Fissure", "Fistula", "Pilonidal sinus"],
-  },
-  {
-    title: "Mental Health",
-    image: "/diseases/mental-health.jpg",
-    conditions: ["Anxiety", "Depression", "Sleep Apnea", "Insomnia"],
-  },
-];
+import api from "@/services/api";
 
 const DiseasesWeTreat = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const [diseasesList, setDiseasesList] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    const fetchDiseases = async () => {
+      try {
+        const { data } = await api.get("/diseases");
+        setDiseasesList(data.data);
+      } catch (err) {
+        console.error("Failed to fetch diseases", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDiseases();
+  }, []);
 
   // Progress bar sync
   useEffect(() => {
@@ -112,7 +56,7 @@ const DiseasesWeTreat = () => {
     return () => {
       container.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [loading]); // Re-attach when data loaded
 
   return (
     <div className="w-full bg-neutral-bg py-12">
@@ -171,52 +115,71 @@ const DiseasesWeTreat = () => {
                 }}
               >
                 <div className="grid grid-cols-2 gap-3 sm:gap-[14px]">
-                  {diseases.map((disease, index) => (
-                    <div
-                      key={index}
-                      className="bg-white flex flex-col w-full overflow-hidden"
-                      style={{
-                        borderRadius: "13.38px",
-                        border: "1.78px solid rgba(214,214,214,0.40)",
-                        boxShadow:
-                          "3.57px 3.57px 8.92px -4.46px rgba(0,0,0,0.10)",
-                      }}
-                    >
-                      {/* IMAGE */}
-                      <div className="relative w-full bg-[#D9D9D9] h-[120px] lg:h-[168px]">
-                        <Image
-                          src={disease.image}
-                          alt={disease.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-
-                      {/* CONTENT */}
-                      <div className="p-4 flex flex-col flex-grow">
-                        <h3 className="text-[18px] font-bold mb-3">
-                          {disease.title}
-                        </h3>
-
-                        <ul className="space-y-2">
-                          {disease.conditions.map((condition, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-center gap-2 text-[14px] text-[#7C7C7C]"
-                            >
-                              <Image
-                                src="/icons/tick.svg"
-                                alt=""
-                                width={20}
-                                height={20}
-                              />
-                              {condition}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                  {loading ? (
+                    <div className="col-span-2 text-center py-10 opacity-50">
+                      Loading diseases...
                     </div>
-                  ))}
+                  ) : (
+                    diseasesList.map((disease, index) => {
+                      const apiBaseUrl = (
+                        process.env.NEXT_PUBLIC_API_URL ||
+                        "http://localhost:5000/api/v1/public"
+                      ).replace("/api/v1/public", "");
+                      const imageUrl = disease.image?.startsWith("uploads/")
+                        ? `${apiBaseUrl}/${disease.image}`
+                        : disease.image || "/placeholder-img.svg";
+
+                      return (
+                        <div
+                          key={disease._id || index}
+                          className="bg-white flex flex-col w-full overflow-hidden"
+                          style={{
+                            borderRadius: "13.38px",
+                            border: "1.78px solid rgba(214,214,214,0.40)",
+                            boxShadow:
+                              "3.57px 3.57px 8.92px -4.46px rgba(0,0,0,0.10)",
+                          }}
+                        >
+                          {/* IMAGE */}
+                          <div className="relative w-full bg-[#D9D9D9] h-[120px] lg:h-[168px]">
+                            <Image
+                              src={imageUrl}
+                              alt={disease.name}
+                              fill
+                              className="object-cover"
+                              unoptimized // API images might not be in Next.js public
+                            />
+                          </div>
+
+                          {/* CONTENT */}
+                          <div className="p-4 flex flex-col flex-grow">
+                            <h3 className="text-[18px] font-bold mb-3">
+                              {disease.name}
+                            </h3>
+
+                            <ul className="space-y-2">
+                              {(disease.conditions || []).map(
+                                (condition: string, idx: number) => (
+                                  <li
+                                    key={idx}
+                                    className="flex items-center gap-2 text-[14px] text-[#7C7C7C]"
+                                  >
+                                    <Image
+                                      src="/icons/tick.svg"
+                                      alt=""
+                                      width={20}
+                                      height={20}
+                                    />
+                                    {condition}
+                                  </li>
+                                ),
+                              )}
+                            </ul>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
 
                   {/* Spacer for gradient fade */}
                   <div className="h-12 col-span-2" />
