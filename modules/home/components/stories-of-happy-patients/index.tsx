@@ -128,14 +128,14 @@ const StoriesOfHappyPatients = () => {
       className="w-full bg-[#F0F8FF] relative overflow-hidden"
       style={{ touchAction: "pan-y" }}
     >
-      <div className="max-w-[1320px] mx-auto px-4 py-16 flex flex-col lg:flex-row items-center gap-12">
+      <div className="max-w-[1320px] mx-auto px-4 py-16 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
         {/* LEFT CONTENT */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <h2 className="text-[clamp(32px,4vw,48px)] font-bold mb-4">
             Stories of Happy Patients
           </h2>
 
-          <p className="text-[#555] text-[16px] lg:text-[18px] mb-6 max-w-[500px] mx-auto lg:mx-0">
+          <p className="text-[#555] text-[16px] lg:text-[20px] mb-4 max-w-[500px] mx-auto lg:mx-0">
             At JOGI Ayurved, we are honored to be a part of our patients’
             healing journeys.
           </p>
@@ -150,11 +150,11 @@ const StoriesOfHappyPatients = () => {
           ref={cardsContainerRef}
           className="relative w-full lg:w-1/2 flex justify-center"
         >
-          <div className="cards-wrapper relative w-full max-w-[700px] h-[580px]">
+          <div className="cards-wrapper relative w-full max-w-[700px] h-[420px] lg:h-[580px]">
             {stories.map((story) => (
               <div
                 key={story.id}
-                className="story-card bg-white rounded-[30px] lg:rounded-[50px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-8 lg:p-14 flex flex-col justify-center h-full"
+                className="story-card bg-white rounded-[30px] lg:rounded-[50px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-6 lg:p-14 flex flex-col justify-center h-full"
               >
                 <div className="flex items-center gap-5 mb-8">
                   <div className="relative w-[80px] h-[80px] lg:w-[90px] lg:h-[90px] rounded-[20px] overflow-hidden flex-shrink-0">
@@ -176,7 +176,7 @@ const StoriesOfHappyPatients = () => {
                   </div>
                 </div>
 
-                <p className="text-[#555] text-[16px] lg:text-[20px] leading-[28px] lg:leading-[34px]">
+                <p className="text-[#555] text-[16px] lg:text-[20px] leading-[1.3]">
                   {story.text}
                 </p>
               </div>

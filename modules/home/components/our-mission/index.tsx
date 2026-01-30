@@ -29,12 +29,12 @@ const OurMission = () => {
 
       <div className="w-full max-w-[1043px] mx-auto px-4 relative z-10">
         {/* Title */}
-        <h2 className="text-[32px] font-bold text-[#1a1a2e] font-serif text-center mb-4 uppercase tracking-wider">
+        <h2 className="text-[32px] font-bold text-[#1a1a2e] font-sans text-center mb-4 tracking-wider">
           Our Mission
         </h2>
 
         {/* Description */}
-        <p className="text-[#555] text-[16px] leading-[26px] text-center max-w-[600px] mx-auto mb-12">
+        <p className="text-[#555] text-[20px] leading-[1.2] text-center max-w-[600px] mx-auto mb-12">
           To deliver result oriented Ayurvedic treatments and services to
           establish trust and significance of Ayurved among people, doctors and
           stakeholders.

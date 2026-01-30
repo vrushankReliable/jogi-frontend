@@ -94,16 +94,14 @@ const DiseasesWeTreat = () => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = container;
 
-      const progress =
-        scrollTop / (scrollHeight - clientHeight || 1);
+      const progress = scrollTop / (scrollHeight - clientHeight || 1);
 
       const clamped = Math.min(Math.max(progress, 0), 1);
 
       const minHeight = 50.67;
       const maxHeight = 353;
 
-      const height =
-        minHeight + clamped * (maxHeight - minHeight);
+      const height = minHeight + clamped * (maxHeight - minHeight);
 
       progressBar.style.height = `${height}px`;
     };
@@ -119,18 +117,15 @@ const DiseasesWeTreat = () => {
   return (
     <div className="w-full bg-neutral-bg py-12">
       <div className="w-full max-w-[1320px] mx-auto px-4">
-
         <div className="flex flex-col lg:flex-row gap-6">
-
           {/* LEFT INFO CARD */}
           <div className="w-full lg:w-[614px] bg-[#77C5D2]/10 rounded-[30px] p-6 lg:p-10 flex flex-col justify-between items-center lg:items-start">
-
             <div className="flex flex-col items-center lg:items-start">
-              <h2 className="text-[28px] lg:text-[38px] font-bold leading-[36px] lg:leading-[46px] mb-4 lg:mb-6 text-center lg:text-left">
+              <h2 className="text-[30px] lg:text-[38px] font-bold leading-[36px] lg:leading-[46px] mb-4 text-center lg:text-left">
                 Diseases We Treat
               </h2>
 
-              <p className="text-[#7C7C7C] text-[14px] lg:text-[16px] leading-[22px] lg:leading-[24px] mb-6 lg:mb-0 text-center lg:text-left">
+              <p className="text-[#7C7C7C] text-[16px] lg:text-[20px] leading-[1.3] mb-4 lg:mb-4 text-center lg:text-left">
                 Ayurveda is an ancient healing system that restores balance in
                 the body's energies. It uses herbal remedies, dietary changes,
                 and lifestyle adjustments to alleviate symptoms and enhance
@@ -141,15 +136,12 @@ const DiseasesWeTreat = () => {
             <button className="px-8 h-[45px] bg-primary text-white rounded-[50px] font-semibold text-[14px] hover:bg-[#2D5A61] transition uppercase tracking-wider">
               Book Consultation
             </button>
-
           </div>
 
           {/* RIGHT SCROLL AREA */}
           <div className="flex flex-1 gap-3 w-full h-[318px] lg:h-[491px]">
-
             {/* Scroll Wrapper */}
             <div className="relative flex-1 h-full">
-
               {/* SCROLL CONTAINER */}
               <div
                 ref={scrollContainerRef}
@@ -178,13 +170,11 @@ const DiseasesWeTreat = () => {
                   }
                 }}
               >
-
                 <div className="grid grid-cols-2 gap-3 sm:gap-[14px]">
-
                   {diseases.map((disease, index) => (
                     <div
                       key={index}
-                      className="bg-white flex flex-col w-full"
+                      className="bg-white flex flex-col w-full overflow-hidden"
                       style={{
                         borderRadius: "13.38px",
                         border: "1.78px solid rgba(214,214,214,0.40)",
@@ -192,7 +182,6 @@ const DiseasesWeTreat = () => {
                           "3.57px 3.57px 8.92px -4.46px rgba(0,0,0,0.10)",
                       }}
                     >
-
                       {/* IMAGE */}
                       <div className="relative w-full bg-[#D9D9D9] h-[120px] lg:h-[168px]">
                         <Image
@@ -225,39 +214,29 @@ const DiseasesWeTreat = () => {
                             </li>
                           ))}
                         </ul>
-
                       </div>
-
                     </div>
                   ))}
 
                   {/* Spacer for gradient fade */}
                   <div className="h-12 col-span-2" />
-
                 </div>
-
               </div>
 
               {/* GRADIENT OVERLAY */}
               <div className="absolute bottom-0 left-0 w-full h-[60px] lg:h-[150px] bg-gradient-to-t from-white via-white/60 to-transparent pointer-events-none z-30" />
-
             </div>
 
             {/* DESKTOP PROGRESS BAR */}
             <div className="hidden lg:flex w-[8.59px] h-[353px] bg-[#ECECEC] rounded-[12.88px] self-center">
-
               <div
                 ref={progressBarRef}
                 className="w-full bg-primary rounded-[12.88px]"
                 style={{ height: "50.67px" }}
               />
-
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
   );

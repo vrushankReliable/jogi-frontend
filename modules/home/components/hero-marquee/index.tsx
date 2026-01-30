@@ -9,7 +9,6 @@ const marqueeItems = [
   "Root-Cause Treatments",
   "Personalized Treatments",
   "Natural Therapies",
-  "Authentic Ayurveda",
 ];
 
 const HeroMarquee = () => {

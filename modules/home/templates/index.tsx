@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Hero from "../components/hero";
 import HeroMarquee from "../components/hero-marquee";
@@ -14,10 +15,27 @@ import OurFounder from "../components/our-founder";
 import SpreadingAyurveda from "../components/spreading-ayurveda";
 import FAQ from "../components/faq";
 import ScheduleConsultation from "../components/schedule-consultation";
+import ConsultationModal from "../components/consultation-modal";
+import StickyBottomActions from "../components/sticky-bottom-actions";
 
 const HomeTemplate = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsModalOpen(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="flex flex-col gap-0 w-full">
+    <div className="flex flex-col gap-0 w-full relative">
+      <ConsultationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+      <StickyBottomActions onOpenConsultation={() => setIsModalOpen(true)} />
       <Hero />
       <HeroMarquee />
       <HealingJourneys />

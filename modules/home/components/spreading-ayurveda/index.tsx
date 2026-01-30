@@ -90,22 +90,21 @@ const SpreadingAyurveda = () => {
       <div className="w-full max-w-[1246px] mx-auto px-4 relative z-10">
         {/* Title */}
         <h2 className="text-[28px] lg:text-[38px] font-bold text-black text-center mb-4 leading-[36px] lg:leading-[40px]">
-          Spreading Ayurved to Millions
+          Spreading the Knowledge of Ayurveda
         </h2>
 
         {/* Subtitle Paragraph 1 */}
-        <p className="text-[#7C7C7C] text-[16px] lg:text-[22px] font-medium text-center mb-4 max-w-[949px] mx-auto leading-[24px] lg:leading-[26px]">
-          Our extensive work in public health education includes conducting
-          seminars, workshops, and YouTube sessions, helping millions understand
-          Ayurvedic wellness in Surat and beyond.
+        <p className="text-[#7C7C7C] text-[16px] lg:text-[20px] font-medium text-center mb-4 max-w-[949px] mx-auto leading-[1.3]">
+          Ayurveda is not just about treating diseases; it is a way of life. Our
+          vision is to spread the wisdom of Ayurveda globally, helping people
+          embrace natural healing and sustainable wellness.
         </p>
 
         {/* Subtitle Paragraph 2 */}
-        <p className="text-[#7C7C7C] text-[16px] lg:text-[22px] font-medium text-center mb-10 max-w-[949px] mx-auto leading-[24px] lg:leading-[26px]">
-          Dr. Devangi Jogal and Mr. Nilesh Jogal have written multiple
-          bestselling books together on Ayurveda, offering readers profound
-          knowledge and hands-on guidance for achieving better health and
-          greater life balance.
+        <p className="text-[#7C7C7C] text-[16px] lg:text-[20px] font-medium text-center mb-4 max-w-[949px] mx-auto leading-[1.3]">
+          We aim to bridge the gap between ancient traditions and modern
+          healthcare, ensuring that Ayurveda is accessible, effective, and
+          trusted by everyone.
         </p>
 
         {/* Books Container - Unified Responsive Animation */}
@@ -183,10 +182,10 @@ const SpreadingAyurveda = () => {
         </div>
 
         {/* Bottom Description */}
-        <p className="text-[#7C7C7C] text-[16px] lg:text-[22px] font-medium text-center max-w-[949px] mx-auto leading-[24px] lg:leading-[26px]">
-          These books serve as practical guides to Ayurvedic wellness and
-          Panchakarma, emphasizing the role of diet, lifestyle, and detox
-          therapies in disease prevention and overall health.
+        <p className="text-[#7C7C7C] text-[16px] lg:text-[20px] font-medium text-center max-w-[949px] mx-auto leading-[1.3] mb-4">
+          We regularly conduct workshops, webinars, and awareness camps to
+          educate people about the benefits of Ayurveda and how it can transform
+          lives.
         </p>
       </div>
     </section>

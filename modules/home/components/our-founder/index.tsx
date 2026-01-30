@@ -31,7 +31,7 @@ const OurFounder = () => {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-[#666] text-[16px] text-center mb-10">
+        <p className="text-[#666] text-[20px] text-center mb-10">
           Meet the visionaries behind our journey of Ayurvedic excellence
         </p>
 

@@ -17,19 +17,19 @@ const FeaturedBy = () => {
   return (
     <div className="w-full bg-white py-12">
       {/* Title */}
-      <h2 className="text-[clamp(24px,4vw,28px)] font-bold text-black text-center mb-10 font-sans">
+      <h2 className="text-[28px] lg:text-[36px] font-bold text-black text-center mb-10 font-sans">
         Trusted and Featured By
       </h2>
 
       {/* Marquee Container */}
       <div className="relative overflow-hidden w-full">
         {/* Marquee Animation */}
-        <div className="flex animate-marquee-mobile lg:animate-marquee whitespace-nowrap gap-10">
+        <div className="flex animate-marquee-mobile lg:animate-marquee whitespace-nowrap">
           {/* First set of logos */}
           {logos.map((logo, index) => (
             <div
               key={`logo-1-${index}`}
-              className="flex-shrink-0 flex items-center justify-center h-[100px] w-[200px]"
+              className="flex-shrink-0 flex items-center justify-center h-[100px] w-[200px] mx-5"
             >
               <img
                 src={logo.src}
@@ -42,7 +42,7 @@ const FeaturedBy = () => {
           {logos.map((logo, index) => (
             <div
               key={`logo-2-${index}`}
-              className="flex-shrink-0 flex items-center justify-center h-[100px] w-[200px]"
+              className="flex-shrink-0 flex items-center justify-center h-[100px] w-[200px] mx-5"
             >
               <img
                 src={logo.src}

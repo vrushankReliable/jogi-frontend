@@ -108,8 +108,8 @@ const WhyJogi = () => {
               </div>
 
               {/* Slide Label - Centered */}
-              <p className="text-white text-[18px] min-[1025px]:text-[24px] font-bold font-sans leading-[30px] min-[1025px]:leading-[40px] mt-3 min-[1025px]:mt-5 text-center">
-                {slides[currentSlide].label}
+              <p className="text-white text-[18px] min-[1025px]:text-[24px] font-bold font-sans leading-[1.3] mt-3 min-[1025px]:mt-5 text-center">
+                Experienced Doctors
               </p>
 
               {/* Dots Navigation - Centered */}
@@ -135,8 +135,12 @@ const WhyJogi = () => {
                 <h2 className="text-[24px] min-[1025px]:text-[32px] font-bold text-white font-sans mb-2 min-[1025px]:mb-4">
                   {slides[currentSlide].title}
                 </h2>
-                <p className="text-white/90 text-[14px] min-[1025px]:text-[22px] font-normal leading-[20px] min-[1025px]:leading-[24px] font-sans mb-4 min-[1025px]:mb-8 line-clamp-4 min-[1025px]:line-clamp-none">
-                  {slides[currentSlide].description}
+                <p className="text-white/90 text-[14px] min-[1025px]:text-[22px] font-normal leading-[1.3] font-sans mb-4 min-[1025px]:mb-8 line-clamp-4 min-[1025px]:line-clamp-none">
+                  At JOGI Ayurved, our team of highly qualified and experienced
+                  vaidyas (Ayurvedic doctors) brings years of expertise in
+                  diagnosing and treating complex health conditions. We believe
+                  in Nadi Parikshan (Pulse Diagnosis) to understand the root
+                  cause of ailments and provide personalized treatment plans.
                 </p>
                 <button className="w-[160px] min-[1025px]:w-[208px] h-[40px] min-[1025px]:h-[45px] bg-neutral-bg text-primary rounded-[50px] font-semibold text-[12px] min-[1025px]:text-[14px] hover:bg-white transition-colors duration-300">
                   VISIT US

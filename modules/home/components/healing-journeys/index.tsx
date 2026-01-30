@@ -164,24 +164,23 @@ const HealingJourneys = () => {
       <div className="w-full min-[1025px]:h-full flex flex-col justify-center items-center relative z-20 pointer-events-none px-4 pt-10 min-[1025px]:pt-[130px]">
         <div className="max-w-[543px] flex flex-col items-center text-center pointer-events-auto bg-neutral-bg min-[1025px]:bg-transparent px-6 py-8 rounded-[20px] min-[1025px]:p-0 min-[1025px]:rounded-none">
           {/* Headline - Montserrat Bold 38px */}
-          <h2 className="text-[clamp(28px,4vw,38px)] font-bold text-black font-sans leading-[36px] min-[1025px]:leading-[40px] mb-6 min-[1025px]:mb-8">
+          <h2 className="text-[clamp(28px,4vw,38px)] font-bold text-black font-sans leading-[36px] min-[1025px]:leading-[40px] mb-6 min-[1025px]:mb-4">
             Healing journeys
             <br />
             through Ayurveda
           </h2>
 
           {/* Content - Montserrat Medium 22px */}
-          <div className="space-y-6 min-[1025px]:space-y-8">
-            <p className="text-[#7C7C7C] text-[clamp(16px,2vw,22px)] font-medium leading-[26px] font-sans">
+          <div className="space-y-4">
+            <p className="text-[#7C7C7C] text-[20px] font-medium leading-[1.3] font-sans">
               At JOGI Ayurved, we draw wisdom from the timeless science of
               Ayurveda to nurture both body and mind. Our treatments are
               thoughtfully designed to restore balance, strengthen immunity, and
-              awaken the body’s natural healing power. Through personalized
-              consultations, classical therapies, and holistic care, we focus
-              not just on relieving symptoms but on improving overall
-              well-being.
+              enhance complete well-being. Through personalized consultations,
+              classical therapies, and holistic care, we focus not just on
+              relieving symptoms but on improving overall well-being.
             </p>
-            <p className="text-[#7C7C7C] text-[clamp(16px,2vw,22px)] font-medium leading-[26px] font-sans">
+            <p className="text-[#7C7C7C] text-[20px] font-medium leading-[26px] font-sans">
               At JOGI Ayurved, health is a journey—where balance is restored,
               wellness is celebrated, and true healing begins from within.
             </p>

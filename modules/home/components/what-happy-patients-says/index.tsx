@@ -82,12 +82,12 @@ const WhatHappyPatientsSays = () => {
     >
       <div className="w-full max-w-[1246px] mx-auto px-4">
         {/* Title */}
-        <h2 className="text-[32px] font-bold text-[#1a1a2e] font-sans text-center mb-3">
+        <h2 className="text-[30px] lg:text-[38px] font-bold text-[#1a1a2e] font-sans text-center mb-4">
           What Happy Patients Says
         </h2>
 
         {/* Subtitle */}
-        <p className="text-[#666] text-[16px] text-center mb-12">
+        <p className="text-[#666] text-[16px] lg:text-[20px] text-center mb-4">
           Real stories of healing and wellness from our satisfied patients
         </p>
 

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/modules/layouts/templates/nav";
 import Footer from "@/modules/layouts/templates/footer";
+import ProgressBar from "@/modules/common/components/progress-bar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} antialiased font-sans`}
       >
+        <ProgressBar />
         <Navbar />
         <main className="pt-[140px]">{children}</main>
         <Footer />

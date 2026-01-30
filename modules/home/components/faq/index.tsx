@@ -177,7 +177,7 @@ const FAQItem = ({
         className="w-full flex items-center justify-between px-6 py-5 cursor-pointer group"
         style={{ minHeight: "60px" }}
       >
-        <span className="text-[16px] font-medium text-[#333] text-left pr-4 group-hover:text-[#3A6F78] transition-colors">
+        <span className="text-[20px] font-medium text-[#333] text-left pr-4 group-hover:text-[#3A6F78] transition-colors">
           {faq.question}
         </span>
         <div
@@ -196,9 +196,7 @@ const FAQItem = ({
 
       <div ref={contentRef} className="h-0 overflow-hidden">
         <div ref={answerRef} className="px-6 pb-5 opacity-0 -translate-y-2.5">
-          <p className="text-[14px] text-[#666] leading-relaxed">
-            {faq.answer}
-          </p>
+          <p className="text-[18px] text-[#666] leading-[1.3]">{faq.answer}</p>
         </div>
       </div>
     </div>
@@ -361,10 +359,21 @@ const FAQ = () => {
         >
           {/* Left Sidebar - Categories */}
           <div className="w-full lg:w-[319px] flex-shrink-0 sticky top-[80px] z-30 bg-white pt-2 lg:pt-0">
-            <div className="flex flex-row h-full pb-4 lg:pb-0 gap-4 border-b lg:border-b-0 border-[#E5E5E5] lg:border-none relative">
-              {/* Vertical Progress Bar */}
+            <div className="flex flex-col lg:flex-row h-full pb-4 lg:pb-0 gap-4 border-b lg:border-b-0 border-[#E5E5E5] lg:border-none relative">
+              {/* Horizontal Progress Bar (Mobile Only) */}
+              <div className="block lg:hidden w-full h-[3px] bg-[#E5E5E5] relative order-1">
+                <div
+                  className="absolute top-0 h-full bg-[#3A6F78] transition-all duration-300"
+                  style={{
+                    left: `${indicatorStyle.left}px`,
+                    width: `${indicatorStyle.width}px`,
+                  }}
+                />
+              </div>
+
+              {/* Vertical Progress Bar (Desktop Only) */}
               <div
-                className="w-[3px] bg-[#E5E5E5] relative mr-0 lg:mr-4 flex-shrink-0"
+                className="hidden lg:block w-[3px] bg-[#E5E5E5] relative mr-4 flex-shrink-0"
                 style={{
                   height: `${faqSections.length * 44}px`,
                 }}
@@ -376,12 +385,15 @@ const FAQ = () => {
               </div>
 
               {/* Categories */}
-              <div className="flex flex-col w-full">
+              <div className="flex flex-row lg:flex-col w-full overflow-x-auto no-scrollbar order-2 lg:order-none">
                 {faqSections.map((section) => (
                   <button
                     key={section.id}
+                    ref={(el) => {
+                      categoryRefs.current[section.id] = el;
+                    }}
                     onClick={() => scrollToSection(section.id)}
-                    className={`w-full whitespace-nowrap text-left px-4 lg:px-2 text-[12px] lg:text-[14px] font-bold uppercase tracking-wide transition-colors h-[44px] flex items-center ${
+                    className={`whitespace-nowrap text-left px-4 lg:px-2 text-[12px] lg:text-[16px] font-bold uppercase tracking-wide transition-colors h-[44px] flex items-center flex-shrink-0 lg:flex-shrink ${
                       activeCategory === section.id
                         ? "text-[#3A6F78]"
                         : "text-[#999] hover:text-[#666]"
@@ -409,7 +421,7 @@ const FAQ = () => {
                   className="flex flex-col gap-3"
                 >
                   {/* Section Title */}
-                  <h3 className="text-[20px] lg:text-[24px] font-semibold text-[#3A6F78] mb-2">
+                  <h3 className="text-[20px] lg:text-[20px] font-semibold text-[#3A6F78] mb-2">
                     {section.label}
                   </h3>
 

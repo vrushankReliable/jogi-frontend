@@ -166,7 +166,7 @@ const Footer = () => {
                     className="w-[25px] h-[25px]"
                   />
                 </div>
-                <p className="text-[#88C3CD] text-[16px] font-medium leading-relaxed max-w-[305px]">
+                <p className="text-[#88C3CD] text-[16px] font-medium leading-[1.3] max-w-[305px]">
                   3rd Floor / 4th Floor, Shreeji Arcade, A-301 / 401, Anand
                   Mahal Rd, behind Bhulka Bhawan School, Adajan Gam, Adajan,
                   Surat, Gujarat 395009

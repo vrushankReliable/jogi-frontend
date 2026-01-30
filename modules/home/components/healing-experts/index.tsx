@@ -85,10 +85,10 @@ const HealingExperts = () => {
                 <h3 className="text-[18px] font-bold text-black leading-[28px]">
                   {expert.name}
                 </h3>
-                <p className="text-[#3A6F78] text-[14px] font-medium leading-[22px]">
+                <p className="text-[#3A6F78] text-[14px] font-medium leading-[1.3]">
                   {expert.education}
                 </p>
-                <p className="text-black text-[14px] font-semibold leading-[22px] mb-4">
+                <p className="text-black text-[14px] font-semibold leading-[1.3] mb-4">
                   {expert.experience}
                 </p>
 
